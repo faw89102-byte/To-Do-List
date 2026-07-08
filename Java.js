@@ -3,7 +3,7 @@ const tombol = document.getElementById("btn-tambah");
 const ul = document.getElementById("Kegiatan");
 
 // 1. Ambil data lama dari Local Storage (jika ada). Kalau kosong, buat Array baru []
-let daftarBelanjaan = JSON.parse(localStorage.getItem("list_barang")) || [];
+let daftarkegiatan = JSON.parse(localStorage.getItem("list_kegiatan")) || [];
 
 // 2. FUNGSI UNTUK MENAMPILKAN BARANG KE LAYAR
 function tampilkanBarang(lakukan) {
@@ -19,17 +19,17 @@ function tampilkanBarang(lakukan) {
     // Fungsi Hapus yang sudah di-upgrade agar menghapus data di Local Storage juga
     tombolHapus.addEventListener("click", function () {
         libaru.remove();
-        // Hapus barang dari Array daftarBelanjaan
-        daftarBelanjaan = daftarBelanjaan.filter(item => item !== lakukan);
-        // Simpan kembali Array yang sudah bersih ke Local Storage
-        localStorage.setItem("list_barang", JSON.stringify(daftarBelanjaan));
+        // Hapus barang dari Array daftarkegiatan
+        daftarkegiatan = daftarkegiatan.filter(item => item !== lakukan);
+        // Simpan kembali Array yang sudah bersih ke Local Storage (disesuaikan ke daftarkegiatan & list_kegiatan)
+        localStorage.setItem("list_kegiatan", JSON.stringify(daftarkegiatan));
     });
 
     ul.appendChild(libaru);
 }
 
 // 3. JALANKAN PERULANGAN: Saat pertama kali web dibuka, tampilkan semua barang yang tersimpan di laci
-daftarBelanjaan.forEach(function(lakukan) {
+daftarkegiatan.forEach(function(lakukan) {
     tampilkanBarang(lakukan);
 });
 
@@ -41,11 +41,11 @@ tombol.addEventListener("click", function(){
     // Tampilkan di layar
     tampilkanBarang(textBaru);
 
-    // Masukkan nama barang baru ke dalam Array daftarBelanjaan
-    daftarBelanjaan.push(textBaru);
+    // Masukkan nama barang baru ke dalam Array daftarkegiatan
+    daftarkegiatan.push(textBaru);
 
-    // Simpan Array terbaru ke dalam Local Storage (diubah jadi teks dulu)
-    localStorage.setItem("list_barang", JSON.stringify(daftarBelanjaan));
+    // Simpan Array terbaru ke dalam Local Storage (disesuaikan ke daftarkegiatan & list_kegiatan)
+    localStorage.setItem("list_kegiatan", JSON.stringify(daftarkegiatan));
 
     text.value = "";
 });
